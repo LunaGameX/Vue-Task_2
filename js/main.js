@@ -248,7 +248,33 @@ Vue.component('col2', {
     }
 })
 
-
+Vue.component('col3', {
+    props: {
+        column3: {
+            type: Array,
+            required: true
+        },
+        card: {
+            type: Object,
+            required: true
+        }
+    },
+    template: `
+        <div>
+            <h2 class="ColH2">Выполненные заметки</h2>
+            <div class="Task" v-for="card in column3">
+                <p><b>Заголовок:</b>{{ card.title }}</p>
+                <ul v-for="task in card.tasks"
+                    v-if="task.text != null">
+                    <li :class="{ completed:task.completed }">
+                    {{ task.text }}
+                    </li>
+                 </ul>
+                <p class="font"><b>Дата, время:</b>{{ card.date }}</p>      
+            </div>
+        </div>
+    `,
+})
 
 let app = new Vue({
     el: '#app',
