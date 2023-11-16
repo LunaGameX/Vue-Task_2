@@ -195,6 +195,59 @@ Vue.component('col1', {
     }
 })
 
+Vue.component('col2', {
+    props: {
+        column2: {
+            type: Array,
+            required: true
+        },
+        card: {
+            type: Object,
+            required: true
+        }
+    },
+    template: `
+        <div>
+            <h2 class="ColH2">Заметки с 50+ выполнеными %</h2>
+            <div class="Task" v-for="card in column2">
+                <p><b>Заголовок:</b>{{ card.title }}</p>
+                <ul v-for="task in card.tasks"
+                    v-if="task.text != null">
+                    <li :class="{ completed:task.completed }" 
+                    @click="updateStage(task, card)" 
+                    :disabled="task.completed">
+                    {{ task.text }}
+                    </li>
+                 </ul>
+            </div>
+        </div>
+    `,
+    methods: {
+        updateStage(task, card) {
+            task.completed = true
+            card.status = 0
+            let length = 0
+
+            for (let i = 0; i < 5; i++) {
+                if (card.tasks[i].text != null) {
+                    length++
+                }
+            }
+
+            for (let i = 0; i < 5; i++) {
+                if (card.tasks[i].completed === true) {
+                    card.status++
+                }
+            }
+
+            if (card.status / length * 100 === 100) {
+                card.date = new Date().toLocaleString()
+                eventBus.$emit('to-column3', card)
+            }
+        }
+    }
+})
+
 
 
 let app = new Vue({
