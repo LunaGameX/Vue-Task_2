@@ -8,13 +8,26 @@ body {
 }
 
 
+h1 {
+    text-align: center;
+}
 
+p {
+    color: #5e2fa8;
+}
 
+.addform {
+    height: 200px;
+    width: 300px;
+    font-size: 28px;
+}
 
-
-
-
-
+.tasks {
+    display: flex;
+    list-style-type: disc;
+    margin: 0;
+    align-items: center;
+}
 
 
 
