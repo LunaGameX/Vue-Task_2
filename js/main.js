@@ -117,6 +117,84 @@ Vue.component('fill', {
     }
 })
 
+Vue.component('col1', {
+    props: {
+        column1: {
+            type: Array,
+            required: true
+        },
+        card: {
+            type: Object,
+            required: true
+        },
+        errors: {
+            type: Array
+        }
+    },
+    template: `
+        <div>
+            <h2 class="ColH2">Заметки с < 50% выполнеными задачами</h2>
+            <div class="Task" v-for="card in column1" :disabled="block">
+                <p><b>Заголовок:</b>{{ card.title }}</p>
+                <ul v-for="task in card.tasks"
+                    v-if="task.text != null">
+                    <li :class="{ completed:task.completed }" 
+                    @click="updateStage(task, card)"
+                    :disabled="task.completed" focus>
+                    {{ task.text }}
+                    </li>
+                 </ul>
+                  <p class="font"><b>Дата и время создания: </b><br>{{ card.date }}</p>
+            </div>
+        </div>
+    `,
+    data() {
+        return {
+            block: false
+        }
+    },
+
+    computed: {
+        blocked() {
+            if (this.errors.length === 2) {
+                this.block = true
+            }
+        }
+
+    },
+    methods: {
+        updateStage(task, card) {
+            task.completed = true
+            card.status = 0
+            let length = 0
+
+            for (let i = 0; i < 5; i++) {
+                //коолво отметок
+                if (card.tasks[i].text != null) {
+                    length++
+                }
+            }
+
+            for (let i = 0; i < 5; i++) {
+                //перенос
+                if (card.tasks[i].completed === true) {
+                    card.status++
+                }
+            }
+
+            if (card.status / length * 100 >= 50) {
+                //$emit отправка от дочерки в родитель
+                eventBus.$emit('to-column2', card)
+            }
+
+            if (card.status / length * 100 === 100) {
+                card.date = new Date().toLocaleString()
+                eventBus.$emit('to-column1-3', card)
+            }
+        },
+    }
+})
+
 
 
 let app = new Vue({
