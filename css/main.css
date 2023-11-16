@@ -29,27 +29,71 @@ p {
     align-items: center;
 }
 
+.completed {
+    text-decoration: line-through;
+}
+
+.error {
+    position: fixed;
+    top: 400px;
+    color: red;
+    width: 200px;
+}
 
 
+.cards {
+    list-style-type: none;
+    font-size: 14px;
+    width: 96%;
+    background-color: rgb(115, 50, 50);
+    padding: 10px;
+    margin-bottom: 10px;
+}
+
+ul {
+    padding-left: 0;
+    list-style-type: none;
+}
+
+#cols {
+    display: flex;
+    justify-content: space-around;
+}
+
+.ColH2 {
+    color: black;
+}
+
+.col {
+    color: black;
+}
+
+.Task {
+    border: solid #a3be62 0.25em;
+}
 
 
+.design {
+    list-style-type: none;
+    max-width: 203px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    border: solid white;
+}
 
+.error {
+    color: red;
+    display: flex;
+    text-align: center;
+    flex-direction: column-reverse;
+}
 
+form {
+    display: block;
+}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+#cols {
+    display: flex;
+    justify-content: space-around;
+    flex-direction: column;
+}
