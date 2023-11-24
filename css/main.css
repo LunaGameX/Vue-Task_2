@@ -16,6 +16,10 @@ p {
     color: #5e2fa8;
 }
 
+li {
+    cursor: pointer;
+}
+
 .addform {
     height: 200px;
     width: 300px;

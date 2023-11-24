@@ -97,11 +97,13 @@ Vue.component('fill', {
         onSubmit() {
             let card = {
                 title: this.title,
-                tasks: [{text: this.task_1, completed: false},
+                tasks: [
+                    {text: this.task_1, completed: false},
                     {text: this.task_2, completed: false},
                     {text: this.task_3, completed: false},
                     {text: this.task_4, completed: false},
-                    {text: this.task_5, completed: false}],
+                    {text: this.task_5, completed: false}
+                ],
                 date: new Date().toLocaleString(),
                 status: 0,
             }
@@ -135,7 +137,7 @@ Vue.component('col1', {
         <div>
             <h2 class="ColH2">Заметки с < 50% выполнеными задачами</h2>
             <div class="Task" v-for="card in column1" :disabled="block">
-                <p><b>Заголовок:</b>{{ card.title }}</p>
+                <p><b>Заголовок:</br></b>{{ card.title }}</p>
                 <ul v-for="task in card.tasks"
                     v-if="task.text != null">
                     <li :class="{ completed:task.completed }" 
@@ -144,7 +146,7 @@ Vue.component('col1', {
                     {{ task.text }}
                     </li>
                  </ul>
-                  <p class="font"><b>Дата и время создания: </b><br>{{ card.date }}</p>
+                 <p class="font"><b>Дата и время создания: </b><br>{{ card.date }}</p>
             </div>
         </div>
     `,
@@ -263,14 +265,14 @@ Vue.component('col3', {
         <div>
             <h2 class="ColH2">Выполненные заметки</h2>
             <div class="Task" v-for="card in column3">
-                <p><b>Заголовок:</b>{{ card.title }}</p>
+                <p><b>Заголовок:</b></br>{{ card.title }}</p>
                 <ul v-for="task in card.tasks"
                     v-if="task.text != null">
                     <li :class="{ completed:task.completed }">
                     {{ task.text }}
                     </li>
                  </ul>
-                <p class="font"><b>Дата, время:</b>{{ card.date }}</p>      
+                <p class="font"><b>Дата, время:</b></br>{{ card.date }}</p>      
             </div>
         </div>
     `,
