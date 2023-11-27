@@ -25,15 +25,20 @@ Vue.component('column_notes', {
         eventBus.$on('submitted-cart', card => {
             this.errors = []
             if (this.column1.length < 3) {
+				let cards = JSON.perse(localStorage.getItem(this.cards))
                 this.column1.push(card)
+				localStorage.setItem('cards', JSON.stringify(this.cards))
             } else {
                 this.errors.push('макс колл-во задач в первом столбце')
             }
         })
         eventBus.$on('to-column2', card => {
+			let cards = JSON.perse(localStorage.getItem(this.tasks))
             this.errors = []
             if (this.column2.length < 5) {
+				let cards = JSON.perse(localStorage.getItem(this.cards))
                 this.column2.push(card)
+				localStorage.setItem('cards', JSON.stringify(this.cards))
                 this.column1.splice(this.column1.indexOf(card), 1)
             } else if (this.column1.length > 0) {
                 this.column1.forEach(items => {
@@ -93,6 +98,7 @@ Vue.component('addCart', {
             show: false
         }
     },
+	mounted: {},
     methods: {
         onSubmit() {
             let card = {
