@@ -1,0 +1,131 @@
+#app {
+    text-align: center;
+}
+
+* {
+    margin: 0px;
+    padding: 0px;
+}
+
+body {
+    background-color: darkgray;
+    font-family: "Times New Roman";
+    color: black;
+}
+
+h2 {
+    text-align: center;
+}
+
+p {
+    color: black;
+}
+
+li {
+    cursor: pointer;
+}
+
+ul {
+    padding-left: 0;
+    list-style-type: none;
+}
+
+form {
+    display: block;
+}
+
+#cols {
+    display: flex;
+}
+
+.col {
+    color: black;
+    border: 1px solid purple;
+    width: 33%;
+}
+
+.cards {
+    list-style-type: none;
+    font-size: 14px;
+    width: 96%;
+    background-color: rgb(115, 50, 50);
+    padding: 10px;
+    margin-bottom: 10px;
+}
+
+.tasks {
+    display: flex;
+    list-style-type: disc;
+    margin: 0;
+    align-items: center;
+}
+
+.ColH2 {
+    color: black;
+}
+
+.Task {
+    border: solid #001fff 0.25em;
+    background-color: brown;
+}
+
+.design {
+    list-style-type: none;
+    max-width: 203px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    border: solid white;
+}
+
+.completed {
+    text-decoration: line-through;
+    color: #26ff00;
+}
+
+.error {
+    position: fixed;
+    top: 200px;
+    color: #00ffd0;
+    width: 200px;
+}
+
+/* Модальное меню */
+.modal-shadow {
+    position: fixed;
+    top: 0;
+    left: 0;
+    min-height: 100%;
+    width: 100%;
+    background: rgba(0, 0, 0, 0.39);
+}
+
+.modal {
+    background: darkorange;
+    border-radius: 8px;
+    padding: 15px;
+    min-width: 420px;
+    max-width: 480px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.modal-close {
+    border-radius: 32%;
+    color: #ffe8d6;
+    background: #6b705c;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    top: 7px;
+    right: 7px;
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+}
+
+.btn.btn-success {
+    background-color: #26ff00;
+}
