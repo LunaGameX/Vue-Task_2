@@ -21,24 +21,25 @@ Vue.component('column_notes', {
             column3: []
         }
     },
+    watch: {
+
+    },
+    methods: {
+
+    },
     mounted() {
         eventBus.$on('submitted-cart', card => {
             this.errors = []
             if (this.column1.length < 3) {
-				let cards = JSON.perse(localStorage.getItem(this.cards))
                 this.column1.push(card)
-				localStorage.setItem('cards', JSON.stringify(this.cards))
             } else {
                 this.errors.push('макс колл-во задач в первом столбце')
             }
         })
         eventBus.$on('to-column2', card => {
-			let cards = JSON.perse(localStorage.getItem(this.tasks))
             this.errors = []
             if (this.column2.length < 5) {
-				let cards = JSON.perse(localStorage.getItem(this.cards))
                 this.column2.push(card)
-				localStorage.setItem('cards', JSON.stringify(this.cards))
                 this.column1.splice(this.column1.indexOf(card), 1)
             } else if (this.column1.length > 0) {
                 this.column1.forEach(items => {
@@ -52,6 +53,7 @@ Vue.component('column_notes', {
         eventBus.$on('to-column3', card => {
             this.column3.push(card)
             this.column2.splice(this.column2.indexOf(card), 1)
+            localStorage.setItem('column3', JSON.stringify(this.column3.push(card)))
         })
     },
 })
@@ -150,6 +152,14 @@ Vue.component('column1', {
             </div>
         </div>
     `,
+    watch: {
+        column1: {
+            handler() {
+                this.updateStorageColumn1()
+            },
+            deep: true
+        }
+    },
     methods: {
         updateStage(task, card) {
             task.completed = true
@@ -183,7 +193,20 @@ Vue.component('column1', {
                     })
                 }
             }
+
         },
+        getStorageColumn1() {
+            return JSON.parse(localStorage.getItem('column1'))
+        },
+        setStorageColumn1(val) {
+            localStorage.setItem('column1', JSON.stringify(val))
+        },
+        updateStorageColumn1() {
+            let column1 = this.getStorageColumn1()
+            if (!column1) column1 = []
+            column1 = JSON.parse(JSON.stringify(this.column1))
+            this.setStorageColumn1(column1)
+        }
     },
     props: {
         column1: {
@@ -220,6 +243,14 @@ Vue.component('column2', {
         </div>
     </section>
     `,
+    watch: {
+        column2: {
+            handler() {
+                this.updateStorageColumn2()
+            },
+            deep: true
+        }
+    },
     methods: {
         updateStage2(task, card) {
             task.completed = true
@@ -232,6 +263,18 @@ Vue.component('column2', {
                 eventBus.$emit('to-column3', card)
                 card.date = new Date().toLocaleString()
             }
+        },
+        getStorageColumn2() {
+            return JSON.parse(localStorage.getItem('column2'))
+        },
+        setStorageColumn2(val) {
+            localStorage.setItem('column2', JSON.stringify(val))
+        },
+        updateStorageColumn2() {
+            let column2 = this.getStorageColumn2()
+            if (!column2) column2 = []
+            column2 = JSON.parse(JSON.stringify(this.column2))
+            this.setStorageColumn2(column2)
         }
     },
     props: {
@@ -262,7 +305,27 @@ Vue.component('column3', {
     </section>
     `,
     computed: {},
-    methods: {},
+    watch: {
+        column3: {
+            handler() {
+                this.updateStorageColumn3()
+            }
+        }
+    },
+    methods: {
+        getStorageColumn3() {
+            return JSON.parse(localStorage.getItem('column3'))
+        },
+        setStorageColumn3(val) {
+            localStorage.setItem('column3', JSON.stringify(val))
+        },
+        updateStorageColumn3() {
+            let column3 = this.getStorageColumn3()
+            if (!column3) column3 = []
+            column3 = JSON.parse(JSON.stringify(this.column3))
+            this.setStorageColumn3(column3)
+        }
+    },
     props: {
         column3: {
             type: Array,
