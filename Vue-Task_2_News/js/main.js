@@ -50,7 +50,7 @@ Vue.component('column_notes', {
                 this.column2.push(card)
                 this.column1.splice(this.column1.indexOf(card), 1)
                 localStorage.setItem('column2', JSON.stringify(this.column2))
-                localStorage.setItem('column3', JSON.stringify(this.column3))
+                localStorage.setItem('column1', JSON.stringify(this.column1))
             } else if (this.column1.length > 0) {
                 this.column1.forEach(items => {
                     items.tasks.forEach(items => {
