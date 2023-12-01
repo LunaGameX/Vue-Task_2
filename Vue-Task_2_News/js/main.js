@@ -112,7 +112,6 @@ Vue.component('addCart', {
             show: false
         }
     },
-	mounted: {},
     methods: {
         onSubmit() {
             let card = {
@@ -136,7 +135,6 @@ Vue.component('addCart', {
             this.task_4 = null
             this.task_5 = null
             this.closeModal()
-            // eventBus.$emit('to-column1', card)
         },
         closeModal() {
             this.show = false
@@ -144,7 +142,6 @@ Vue.component('addCart', {
         openModal() {
             this.show = true
         },
-
     },
 })
 
@@ -166,14 +163,6 @@ Vue.component('column1', {
             </div>
         </div v-for>
     `,
-    // watch: {
-    //     column1: {
-    //         handler() {
-    //             this.updateStorageColumn1()
-    //         },
-    //         deep: true
-    //     }
-    // },
     methods: {
         updateStage(task, card) {
             task.completed = true
@@ -181,22 +170,18 @@ Vue.component('column1', {
             let lengths = 0
 
             for (let i = 0; i < 5; i++) {
-                //коолво отметок
                 if (card.tasks[i].text != null) {
                     lengths++
                 }
             }
 
             for (let i = 0; i < 5; i++) {
-                //перенос
-
                 if (card.tasks[i].completed === true) {
                     card.status++
                 }
             }
 
             if (card.status / lengths * 100 >= 50 && card.status / lengths * 100 < 100) {
-                //$emit отправка от дочерки в родитель
                 eventBus.$emit('to-column2', card)
             } else if (this.column2.length === 5) {
                 this.errors.push('Завершите все задачи в одной из заметок первой колонки')
@@ -210,28 +195,19 @@ Vue.component('column1', {
             }
 
         },
-        // getStorageColumn1() {
-        //     return JSON.parse(localStorage.getItem('column1'))
-        // },
-        // setStorageColumn1(val) {
-        //     localStorage.setItem('column1', JSON.stringify(val))
-        // },
-        // updateStorageColumn1() {
-        //     let column1 = this.getStorageColumn1()
-        //     if (!column1) column1 = []
-        //     column1 = JSON.parse(JSON.stringify(this.column1))
-        //     this.setStorageColumn1(column1)
-        // }
     },
     props: {
         column1: {
             type: Array,
+            card: {
+                type: Object,
+            }
         },
         column2: {
             type: Array,
-        },
-        card: {
-            type: Object,
+            card: {
+                type: Object,
+            }
         },
         errors: {
             type: Array,
@@ -258,14 +234,6 @@ Vue.component('column2', {
         </div>
     </section>
     `,
-    watch: {
-        // column2: {
-        //     handler() {
-        //         this.updateStorageColumn2()
-        //     },
-        //     deep: true
-        // }
-    },
     methods: {
         updateStage2(task, card) {
             task.completed = true
@@ -279,26 +247,14 @@ Vue.component('column2', {
                 card.date = new Date().toLocaleString()
             }
         },
-        // getStorageColumn2() {
-        //     return JSON.parse(localStorage.getItem('column2'))
-        // },
-        // setStorageColumn2(val) {
-        //     localStorage.setItem('column2', JSON.stringify(val))
-        // },
-        // updateStorageColumn2() {
-        //     let column2 = this.getStorageColumn2()
-        //     if (!column2) column2 = []
-        //     column2 = JSON.parse(JSON.stringify(this.column2))
-        //     this.setStorageColumn2(column2)
-        // }
     },
     props: {
         column2: {
             type: Array,
-        },
-        card: {
-            type: Object,
-        },
+            card: {
+                type: Object,
+            }
+        }
     },
 })
 
@@ -320,34 +276,14 @@ Vue.component('column3', {
     </section>
     `,
     computed: {},
-    watch: {
-        // column3: {
-        //     handler() {
-        //         this.updateStorageColumn3()
-        //     }
-        // }
-    },
-    methods: {
-        // getStorageColumn3() {
-        //     return JSON.parse(localStorage.getItem('column3'))
-        // },
-        // setStorageColumn3(val) {
-        //     localStorage.setItem('column3', JSON.stringify(val))
-        // },
-        // updateStorageColumn3() {
-        //     let column3 = this.getStorageColumn3()
-        //     if (!column3) column3 = []
-        //     column3 = JSON.parse(JSON.stringify(this.column3))
-        //     this.setStorageColumn3(column3)
-        // }
-    },
+    methods: {},
     props: {
         column3: {
             type: Array,
-        },
-        card: {
-            type: Object,
-        },
+            card: {
+                type: Object,
+            },
+        }
     },
 })
 
